@@ -1,0 +1,15 @@
+body {
+	background-color: darkblue;
+	color: white;
+}
+
+button {
+	line-height: 100px;
+}
+
+.calc_button {
+	padding: 10px;
+	margin-right: 10px;
+
+}
+
