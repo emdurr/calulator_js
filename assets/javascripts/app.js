@@ -45,38 +45,81 @@
 // Calculator Code
 // Returns array of elements that match that class
 var calcButtons = document.getElementsByClassName('calc_button');
-console.log(calcButtons);
-
+var clearButton = document.getElementsByClassName('clear_button');
 // Add Click Event Listeners To Each Button
 var result;
 var firstNumber;
 var lastNumber;
 var operator;
-var calls = [];
-calls[0] = function(element) { 
-  firstNumber = event.target.innerText; 
-  console.log(firstNumber);
-  calculation.innerText = firstNumber;
-};
-calls[1] = function(element) { 
-  operator = event.target.innerText;
-  console.log(operator);
-  calculation.innerText = firstNumber + " " + operator;
-};
-calls[2] = function(element) { 
-  lastNumber = event.target.innerText; 
-  console.log(lastNumber);
-  calculation.innerText = firstNumber + " " + operator + " " + lastNumber;
-};
+var calculations = document.getElementById('calculations');
+
 
 for(var i = 0; i < calcButtons.length; i++) {
   var button = calcButtons[i];
-  button.addEventListener('click', calls[i], false);
+  button.addEventListener('click', function(event) {
+    if(firstNumber === undefined) {
+      if(event.target.classList.contains('num_button')) {
+        firstNumber = parseInt(event.target.innerText);
+        alert('You have chosen ' + firstNumber);
+      } else {
+        alert('You need to chose a valid integer.');
+        }
+    } else if(operator === undefined) {
+      if(event.target.classList.contains('op_button')) {
+        operator = (event.target.innerText);
+        alert('You have chosen to use ' + operator);
+      } else {
+        alert('You need to choose a valid operator');
+      }
+      } else if(lastNumber === undefined) {
+        if(event.target.classList.contains('num_button')) {
+          lastNumber = parseInt(event.target.innerText);
+          alert('You have chosen to evaluate ' + firstNumber + operator + lastNumber);
+        } else {
+          alert('You need to chose a valid integer.')
+        }
+    } else if(result === undefined) {
+      if(event.target.classList.contains('result_button')) {
+        switch(operator) {
+          case '+':
+            result = (firstNumber + lastNumber);
+            alert('The result of your query is ' + result);
+          break;
+          case '-':
+            result = (firstNumber - lastNumber);
+            alert('The result of your query is ' + result);
+          break;
+          case '*':
+            result = (firstNumber * lastNumber);
+            alert('The result of your query is ' + result);
+          break;
+          case '/':
+            result = (firstNumber / lastNumber);
+            alert('The result of your query is ' + result);
+          break;
+        }
+      } else {
+        alert('You must press = to evaluate your query.');
+      }
+    }
+
+  });
+
 
     // Only allow the user to click on a number first
     // then make the click on a operator
     // only allow the user to click on a number
     // either auto calculate or only allow the = sign to be pressed
+};
+
+for(var i = 0; i < clearButton.length; i++) {
+    var button = clearButton[i];
+    button.addEventListener('click', function(event) {
+      firstNumber = undefined;
+      operator = undefined;
+      lastNumber = undefined;
+      result = undefined;
+  });
 };
 
 
