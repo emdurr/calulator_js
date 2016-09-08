@@ -51,7 +51,8 @@ var result;
 var firstNumber;
 var lastNumber;
 var operator;
-var calculations = document.getElementById('calculations');
+var calculations = document.getElementById('calculation');
+console.log(calculations);
 
 
 for(var i = 0; i < calcButtons.length; i++) {
@@ -60,21 +61,21 @@ for(var i = 0; i < calcButtons.length; i++) {
     if(firstNumber === undefined) {
       if(event.target.classList.contains('num_button')) {
         firstNumber = parseInt(event.target.innerText);
-        alert('You have chosen ' + firstNumber);
+        calculations.innerHTML = firstNumber;
       } else {
         alert('You need to chose a valid integer.');
         }
     } else if(operator === undefined) {
       if(event.target.classList.contains('op_button')) {
         operator = (event.target.innerText);
-        alert('You have chosen to use ' + operator);
+        calculations.innerHTML = (firstNumber + ' ' + operator)
       } else {
         alert('You need to choose a valid operator');
       }
       } else if(lastNumber === undefined) {
         if(event.target.classList.contains('num_button')) {
           lastNumber = parseInt(event.target.innerText);
-          alert('You have chosen to evaluate ' + firstNumber + operator + lastNumber);
+          calculations.innerHTML = (firstNumber + ' ' + operator + ' ' + lastNumber);
         } else {
           alert('You need to chose a valid integer.')
         }
@@ -83,19 +84,19 @@ for(var i = 0; i < calcButtons.length; i++) {
         switch(operator) {
           case '+':
             result = (firstNumber + lastNumber);
-            alert('The result of your query is ' + result);
+            calculations.innerHTML = (firstNumber + ' ' + operator + ' ' + lastNumber + ' = ' + result);
           break;
           case '-':
             result = (firstNumber - lastNumber);
-            alert('The result of your query is ' + result);
+            calculations.innerHTML = (firstNumber + ' ' + operator + ' ' + lastNumber + ' = ' + result);
           break;
           case '*':
             result = (firstNumber * lastNumber);
-            alert('The result of your query is ' + result);
+            calculations.innerHTML = (firstNumber + ' ' + operator + ' ' + lastNumber + ' = ' + result);
           break;
           case '/':
             result = (firstNumber / lastNumber);
-            alert('The result of your query is ' + result);
+            calculations.innerHTML = (firstNumber + ' ' + operator + ' ' + lastNumber + ' = ' + result);
           break;
         }
       } else {
@@ -119,6 +120,7 @@ for(var i = 0; i < clearButton.length; i++) {
       operator = undefined;
       lastNumber = undefined;
       result = undefined;
+      calculations.innerHTML = ('Calculations');
   });
 };
 
